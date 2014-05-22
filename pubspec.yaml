@@ -1,0 +1,6 @@
+name: mapper
+description: Centryl Mapper
+dependencies:
+  postgresql: any
+dev_dependencies:
+  unittest: any
