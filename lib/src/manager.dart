@@ -42,7 +42,6 @@ class Manager<A extends Application> {
     Future<Manager> init() {
         return _connection.connect().then((c) {
             connection = c;
-            print(_connection._pool);
             return this;
         });
     }
