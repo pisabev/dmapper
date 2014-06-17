@@ -8,7 +8,7 @@ class Connection {
 
     Connection(String u, [int min = 1, int max = 5]) {
         uri = u;
-        _pool = new Pool(uri, min: min, max: max);
+        _pool = new Pool(uri, min: min, max: 2);
     }
 
     Future connect() {
