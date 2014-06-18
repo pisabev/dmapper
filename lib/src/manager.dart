@@ -107,10 +107,11 @@ class Manager<A extends Application> {
         return new Future.sync(() {
             if(_unit.started)
                 return _unit.rollback().then((_) => connection.close());
-            _unit = new Unit(this);
-            _cache = new Cache();
-            app = null;
             return connection.close();
+        }).then((_) {
+            _unit = null;
+            _cache = null;
+            app = null;
         });
     }
 
