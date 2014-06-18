@@ -108,10 +108,6 @@ class Manager<A extends Application> {
             if(_unit.started)
                 return _unit.rollback().then((_) => connection.close());
             return connection.close();
-        }).then((_) {
-            _unit = null;
-            _cache = null;
-            app = null;
         });
     }
 
