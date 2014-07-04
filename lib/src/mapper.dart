@@ -207,6 +207,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
     E mergeData(E object, Map data) {
         Map m = object.toMap();
         m.addAll(data);
+        object.init(m);
         return object;
     }
 
