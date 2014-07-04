@@ -8,6 +8,8 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     dynamic pkey;
 
+    Map nulls = new Map();
+
     static Map _ref = new Map();
 
     static const String _SEP = '.';
@@ -116,6 +118,8 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
             if (v == null) {
                 if (insert)
                     builder.set(_escape(k), 'DEFAULT');
+                else if (nulls.containsKey(k))
+                    builder.set(_escape(k), null);
             } else {
                 builder.set(_escape(k), '@' + k).setParameter(k, v);
             }
