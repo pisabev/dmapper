@@ -113,7 +113,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         return q.stream((stream) => stream.drain(true));
     }
 
-    Builder _setUpdateData(Builder builder, data, [bool insert = false]) {
+    /*Builder _setUpdateData(Builder builder, data, [bool insert = false]) {
         data.forEach((k, v) {
             if (v == null) {
                 if (insert)
@@ -123,6 +123,16 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
             } else {
                 builder.set(_escape(k), '@' + k).setParameter(k, v);
             }
+        });
+        return builder;
+    }*/
+
+    Builder _setUpdateData(Builder builder, data, [bool insert = false]) {
+        data.forEach((k, v) {
+            if (v == null && insert)
+                builder.set(_escape(k), 'DEFAULT');
+            else
+                builder.set(_escape(k), '@' + k).setParameter(k, v);
         });
         return builder;
     }
