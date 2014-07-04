@@ -1,4 +1,4 @@
-part of mapper;
+part of client;
 
 class Entity {
 
