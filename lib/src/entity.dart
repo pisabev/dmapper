@@ -1,14 +1,8 @@
-part of client;
+part of mapper;
 
-class Entity {
+abstract class Entity<E> {
 
     void init(Map data);
-
-    void initMerge(Map data) {
-        var m = toMap();
-        m.addAll(data);
-        init(m);
-    }
 
     Map toMap();
 

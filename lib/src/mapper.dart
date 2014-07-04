@@ -204,6 +204,12 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     E createObject([dynamic data]);
 
+    E mergeData(E object, Map data) {
+        Map m = object.toMap();
+        m.addAll(data);
+        return object;
+    }
+
     C createCollection();
 
 }
