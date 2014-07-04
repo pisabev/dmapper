@@ -119,7 +119,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
                 if (insert)
                     builder.set(_escape(k), 'DEFAULT');
                 else if (nulls.contains(k))
-                    builder.set(_escape(k), null);
+                    builder.set(_escape(k), '@' + k).setParameter(k, v);
             } else {
                 builder.set(_escape(k), '@' + k).setParameter(k, v);
             }
