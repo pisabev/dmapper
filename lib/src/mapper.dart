@@ -8,8 +8,6 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     dynamic pkey;
 
-    List nulls = new List();
-
     static Map _ref = new Map();
 
     static const String _SEP = '.';
