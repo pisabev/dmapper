@@ -1,4 +1,4 @@
-library client;
+library mapper_shared;
 
 import 'dart:collection';
 

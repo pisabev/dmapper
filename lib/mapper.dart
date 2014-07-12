@@ -1,4 +1,4 @@
-library mapper;
+library mapper_server;
 
 import 'dart:async';
 import 'package:postgresql/postgresql_pool.dart';

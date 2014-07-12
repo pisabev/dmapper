@@ -1,4 +1,4 @@
-part of mapper;
+part of mapper_server;
 
 abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Application> {
 

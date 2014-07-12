@@ -1,4 +1,4 @@
-part of client;
+part of mapper_shared;
 
 class Collection<E> extends ListBase<E> {
 

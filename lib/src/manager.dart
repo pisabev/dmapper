@@ -1,4 +1,4 @@
-part of mapper;
+part of mapper_server;
 
 class Manager<A extends Application> {
 
