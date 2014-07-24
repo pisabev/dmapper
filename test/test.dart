@@ -5,7 +5,6 @@ import 'dart:async';
 import 'dart:mirrors';
 import 'package:mapper/mapper.dart';
 import 'package:unittest/unittest.dart';
-import 'package:serialization/serialization.dart';
 
 import 'package:mapper/mapper.dart';
 

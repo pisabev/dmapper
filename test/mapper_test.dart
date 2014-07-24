@@ -32,11 +32,6 @@ class ProductExt extends Product {
 ttt() {
     var obj = new Product2();
     obj.title = 'ssss';
-    var ser = new Serialization();
-    ser.addRule(new ClosureRule(obj.runtimeType,
-    productToMap, createProduct, fillInProduct));
-    //ser.read(obj);
-    print(ser.write(obj));
     return;
     var data = readClassData();
     var date = new DateTime.now();
@@ -171,17 +166,4 @@ createProduct(Map m) => new Product2.fromMap(m);
 fillInProduct(Product a, Map m) {
     a.title = m["title"];
     a.price = m['price'];
-}
-
-class ProductRule extends CustomRule {
-    bool appliesTo(instance, Writer w) => instance.runtimeType == Product2;
-    getState(instance) => {
-        'title': instance.title,
-        'price': instance._price
-    };
-    create(state) => new Product2();
-    setState(Product2 a, Map state) {
-        a.title = state[0];
-        a.price = state[1];
-    }
 }
