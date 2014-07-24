@@ -66,16 +66,16 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
     Future<C> loadC(Builder builder) => builder.stream(_streamToCollection);
 
     Future<E> insert(E object) {
-        Map data = object.toMap();
+        Map data = readObject(object);
         return _setUpdateData(insertBuilder(), data, true)
         .execute().then((result) {
-            object.init(_reMapResult(result[0]));
+            setObject(object, _reMapResult(result[0]));
             return _cacheAdd(_cacheKeyFromData(data), new Future.value(object));
         });
     }
 
     Future<E> update(E object) {
-        Map data = object.toMap();
+        Map data = readObject(object);
         Builder q = _setUpdateData(updateBuilder(), data);
         if (pkey is List)
             pkey.forEach((k) => q.andWhere(_escape(k) + ' = @' + k).setParameter(k, data[k]));
@@ -85,7 +85,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
     }
 
     Future<bool> delete(E object) {
-        Map data = object.toMap();
+        Map data = readObject(object);
         if(pkey is List)
             return deleteComposite(pkey.map((k) => data[k]));
         else
@@ -202,10 +202,14 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     E createObject([dynamic data]);
 
+    void setObject(E object, Map data) => object.init(data);
+
+    Map readObject(E object) => object.toMap();
+
     E mergeData(E object, Map data) {
-        Map m = object.toMap();
+        Map m = readObject(object);
         m.addAll(data);
-        object.init(m);
+        setObject(object, m);
         return object;
     }
 

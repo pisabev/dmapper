@@ -2,5 +2,6 @@ name: mapper
 description: Centryl Mapper
 dependencies:
   postgresql: any
+  serialization: any
 dev_dependencies:
   unittest: any

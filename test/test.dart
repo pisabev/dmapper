@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:mirrors';
 import 'package:mapper/mapper.dart';
 import 'package:unittest/unittest.dart';
+import 'package:serialization/serialization.dart';
 
 import 'package:mapper/mapper.dart';
 
@@ -33,9 +34,10 @@ cleanUp() {
 }
 
 main() {
-    startUp();
+    //startUp();
     group('Builder', () {
-        test('Select', querySelector);
+        //test('Select', querySelector);
+        test('annotations', ttt);
         /*var s = new Serialization()..addRule(new TestDBRule());
         var p = new Test();
         p.title = 'title';
@@ -45,5 +47,5 @@ main() {
         print(r);*/
         //print(inpsector(new Test2('asdasdas', 123)));
     });
-    cleanUp();
+    //cleanUp();
 }
