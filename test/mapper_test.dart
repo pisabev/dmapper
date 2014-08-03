@@ -22,7 +22,7 @@ class Product {
     @Field()
     var price;
 
-    Test();
+    Product();
 }
 
 class ProductExt extends Product {
