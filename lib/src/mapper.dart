@@ -12,6 +12,10 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     static const String _SEP = '.';
 
+    Function entity;
+
+    Function collection;
+
     Mapper(Manager<A> man) {
         manager = man;
         if (pkey == null)
@@ -200,7 +204,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     _escape(String string) => '"$string"';
 
-    E createObject([dynamic data]);
+    E createObject([dynamic data]) => markObject(entity(manager, data));
 
     void setObject(E object, Map data) => object.init(data);
 
@@ -213,6 +217,6 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         return object;
     }
 
-    C createCollection();
+    C createCollection() => collection();
 
 }
