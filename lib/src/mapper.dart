@@ -115,20 +115,6 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         return q.stream((stream) => stream.drain(true));
     }
 
-    /*Builder _setUpdateData(Builder builder, data, [bool insert = false]) {
-        data.forEach((k, v) {
-            if (v == null) {
-                if (insert)
-                    builder.set(_escape(k), 'DEFAULT');
-                else if (nulls.contains(k))
-                    builder.set(_escape(k), '@' + k).setParameter(k, v);
-            } else {
-                builder.set(_escape(k), '@' + k).setParameter(k, v);
-            }
-        });
-        return builder;
-    }*/
-
     Builder _setUpdateData(Builder builder, data, [bool insert = false]) {
         data.forEach((k, v) {
             if (v == null && insert)
@@ -170,7 +156,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         });
     }
 
-    E markObject(E object) {
+    E _markObject(E object) {
         _ref[object.runtimeType.toString()] = this;
         return object;
     }
@@ -192,9 +178,7 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         return f;
     }
 
-    Future<E> _cacheGet(String k) {
-        return manager.cacheGet(this.runtimeType.toString() + k);
-    }
+    Future<E> _cacheGet(String k) => manager.cacheGet(this.runtimeType.toString() + k);
 
     CollectionBuilder<E, C, A> collectionBuilder([Builder q]) {
         if (q == null)
@@ -204,7 +188,9 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
 
     _escape(String string) => '"$string"';
 
-    E createObject([dynamic data]) => markObject(entity(manager, data));
+    E createObject([dynamic data]) => _markObject(entity(manager, data));
+
+    C createCollection() => collection();
 
     void setObject(E object, Map data) => object.init(data);
 
@@ -216,7 +202,5 @@ abstract class Mapper<E extends Entity, C extends Collection<E>, A extends Appli
         setObject(object, m);
         return object;
     }
-
-    C createCollection() => collection();
 
 }
