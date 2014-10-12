@@ -1,20 +1,22 @@
 part of mapper_server;
 
-abstract class Application<A extends Application> {
+class Application<A extends Application> {
 
     Manager<A> m;
 
-    Map data = new Map();
+    Map _data = new Map();
 
     Map _cache = new Map();
 
-    Application(this.data);
-
-    //get(String key, Function f) => (_cache.containsKey(key))? _cache[key] : _cache[key] = f();
+    Application(Map data) {
+        data.forEach((k, v) => _data[new Symbol(k)] = v);
+    }
 
     noSuchMethod(Invocation invocation) {
         var key = invocation.memberName;
-        return (_cache.containsKey(key))? _cache[key] : _cache[key] = data[key](m);
+        if(invocation.isGetter)
+            return (_cache.containsKey(key))? _cache[key] : _cache[key] = _data[key](m);
+        super.noSuchMethod(invocation);
     }
 
 }
