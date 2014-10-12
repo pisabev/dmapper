@@ -8,9 +8,7 @@ class Application<A extends Application> {
 
     Map _cache = new Map();
 
-    Application(Map data) {
-        data.forEach((k, v) => _data[new Symbol(k)] = v);
-    }
+    setData(Map data) => data.forEach((k, v) => _data[new Symbol(k)] = v);
 
     noSuchMethod(Invocation invocation) {
         var key = invocation.memberName;
