@@ -2,18 +2,27 @@ part of mapper_server;
 
 class Connection {
 
-    String uri;
+    String _uri;
+
+    int _min, _max;
 
     Pool _pool;
 
-    Connection(String u, [int min = 1, int max = 5]) {
-        uri = u;
-        _pool = new Pool(uri, min: min, max: max);
+    Connection(this._uri, [this._min = 1, int this._max = 5]) {
+        _createPool();
     }
+
+    _createPool() => _pool = new Pool(_uri, min: _min, max: _max);
 
     Future connect() {
         return _pool.connect()
-        .catchError((e) => print(e));
+        .timeout(new Duration(milliseconds:100), onTimeout:() {
+            _pool.destroy();
+            _createPool();
+            log.warning('pool destroyed (probably connections leak)');
+            return connect();
+        })
+        .catchError((e) => log.severe(e));
     }
 
 }

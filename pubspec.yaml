@@ -3,5 +3,6 @@ description: Centryl Mapper
 version: 1.0.0
 dependencies:
   postgresql: any
+  logging: any
 dev_dependencies:
   unittest: any
