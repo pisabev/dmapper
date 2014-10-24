@@ -432,6 +432,7 @@ class Builder {
         });
         clone._limit = _limit;
         clone._offset = _offset;
+        clone._params = new Map.from(_params);
         return clone;
     }
 

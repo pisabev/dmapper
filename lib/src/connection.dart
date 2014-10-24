@@ -16,7 +16,7 @@ class Connection {
 
     Future connect() {
         return _pool.connect()
-        .timeout(new Duration(milliseconds:100), onTimeout:() {
+        .timeout(new Duration(milliseconds:500), onTimeout:() {
             _pool.destroy();
             _createPool();
             log.warning('pool destroyed (probably connections leak)');
